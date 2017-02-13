@@ -32,7 +32,10 @@ public class ExtractService
 	 * @param hrefs_used  链接管理，将访问过得链接放到hrefs_used容器中，hrefs_used中的所有链接都不可再次访问
 	 * 
 	 */
-
+	public final static int PRICECASE = 1;
+	public final static int DATECASE = 2;
+	public final static int PUBLISHERCASE = 3;
+	
 	public static  void hrefManage(Elements newlinks,Set<String> hrefs ,Set<String> hrefs_used)
 	{
 		for (Element newlink : newlinks)
@@ -122,55 +125,49 @@ public class ExtractService
 			
 			String author = null;
 			
-			int i,j,k=1;
-			j=pubInfo.length();
-			for(i=pubInfo.length()-1;i>0;i--)
+			int pubSubHead,pubSubTail,pubSubSwch=PRICECASE;
+			pubSubTail=pubInfo.length();
+			for(pubSubHead=pubInfo.length()-1;pubSubHead>0;pubSubHead--)
 			{
-				//System.out.println("****"+pubInfo.charAt(i));
-				if('/'==pubInfo.charAt(i))
+				if('/'==pubInfo.charAt(pubSubHead))
 				{
-				switch(k)	
+				switch(pubSubSwch)	
 				{
-				case 1:
-					price= pubInfo.substring(i+1, j);
-					j=i;k++;
+				case PRICECASE:
+					price= pubInfo.substring(pubSubHead+1, pubSubTail);
+					pubSubTail=pubSubHead;
+					pubSubSwch++;
 					break;
-				case 2:
-					date= pubInfo.substring(i+1, j);
-					j=i;k++;
+				case DATECASE:
+					date= pubInfo.substring(pubSubHead+1, pubSubTail);
+					pubSubTail=pubSubHead;
+					pubSubSwch++;
 					break;
-				case 3:
-					publisher= pubInfo.substring(i+1, j);
-					j=i;k++;
+				case PUBLISHERCASE:
+					publisher= pubInfo.substring(pubSubHead+1, pubSubTail);
+					pubSubTail=pubSubHead;
+					pubSubSwch++;
 					break;
 				default:break;
 				}
 				}
 				
 			}
-			j=0;
-			for(i=0;i<pubInfo.length();i++)
+			pubSubHead=0;
+			for(pubSubTail=0;pubSubTail<pubInfo.length();pubSubTail++)
 			{
-				if(pubInfo.charAt(i)=='/')
+				if(pubInfo.charAt(pubSubTail)=='/')
 				{
-					author=pubInfo.substring(j, i-1);
+					author=pubInfo.substring(pubSubHead, pubSubTail-1);
 				}
 				
 			}
-			
-			
+					
 			data.setBookauthor(author);
 			data.setDate(date);
-			data.setPrice(price);
-			
-			
-			
+			data.setPrice(price);		
 			data.setPublisher(publisher);	
-			
-			
-			
-			
-			
+		
 		}
 		if(data.getpeople()>=1000)
 		datas.add(data);
