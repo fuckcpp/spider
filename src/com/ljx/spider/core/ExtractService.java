@@ -179,12 +179,10 @@ public class ExtractService
 	
 	public static  List<LinkTypeData> extract(Rule rule,List<LinkTypeData> datas,Set<String> hrefs ,Set<String> hrefs_used)
 	{
-
 		// 进行对rule的必要校验
 		validateRule(rule);
 
-		while(hrefs.size()>0){
-			
+		while(hrefs.size()>0){			
 		try
 		{
 			/**
@@ -195,8 +193,6 @@ public class ExtractService
 			
 			String url = it.next();
 			System.out.println("访问  ****   "+url);
-			String[] params = rule.getParams();
-			String[] values = rule.getValues();
 			String resultTagName = rule.getResultTagName();
 			int type = rule.getType();
 			int requestType = rule.getRequestMoethod();
@@ -207,15 +203,6 @@ public class ExtractService
 			hrefs_used.add(url);
 			System.out.println("尚有链接数：##"+hrefs.size());			
 			
-
-			if (params != null)
-			{
-				for (int i = 0; i < params.length; i++)
-				{
-					conn.data(params[i], values[i]);
-				}
-			}
-
 			// 设置请求类型
 			Document doc = null;
 			switch (requestType)
@@ -283,14 +270,6 @@ public class ExtractService
 		{
 			System.out.println(url+"url的格式不正确！");
 			throw new RuleException("url的格式不正确！");
-		}
-
-		if (rule.getParams() != null && rule.getValues() != null)
-		{
-			if (rule.getParams().length != rule.getValues().length)
-			{
-				throw new RuleException("参数的键值对个数不匹配！");
-			}
 		}
 
 	}

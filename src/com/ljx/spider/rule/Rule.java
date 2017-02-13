@@ -14,15 +14,6 @@ public class Rule
 	private String url;
 
 	/**
-	 * 参数集合
-	 */
-	private String[] params;
-	/**
-	 * 参数对应的值
-	 */
-	private String[] values;
-
-	/**
 	 * 对返回的HTML，第一次过滤所用的标签，请先设置type
 	 */
 	private String resultTagName;
@@ -52,13 +43,10 @@ public class Rule
 	}
 
 	
-	public Rule(String url, String[] params, String[] values,
-			String resultTagName, int type, int requestMoethod)
+	public Rule(String url,String resultTagName, int type, int requestMoethod)
 	{
 		super();
 		this.url = url;
-		this.params = params;
-		this.values = values;
 		this.resultTagName = resultTagName;
 		this.type = type;
 		this.requestMoethod = requestMoethod;
@@ -75,25 +63,6 @@ public class Rule
 		this.url = url;
 	}
 
-	public String[] getParams()
-	{
-		return params;
-	}
-
-	public void setParams(String[] params)
-	{
-		this.params = params;
-	}
-
-	public String[] getValues()
-	{
-		return values;
-	}
-
-	public void setValues(String[] values)
-	{
-		this.values = values;
-	}
 
 	public String getResultTagName()
 	{

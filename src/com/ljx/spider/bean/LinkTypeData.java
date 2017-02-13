@@ -87,14 +87,6 @@ public class LinkTypeData
 	}
 
 	
-	@Override
-	public String toString()
-	{
-		return "LinkTypeData [id=" + id + ", linkHref=" 
-				+ ", linkText="  + ", summary=" + 
-			 ", content="  + "]";
-	}
-	
 	
 
 }

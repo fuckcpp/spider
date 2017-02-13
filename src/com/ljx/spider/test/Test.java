@@ -26,23 +26,23 @@ public class Test
 		List<LinkTypeData> datas_ = new ArrayList<LinkTypeData>();
 		Set<String> hrefs = new HashSet<String>();
 		Set<String> hrefsUsed = new HashSet<String>();
-		String startWith="https://book.douban.com/tag/编程?start=60&type=T";
+		String startWith="https://book.douban.com/tag/编程?start=60&type=T";//种子
 		hrefs.add(startWith);
-		Rule rule = new Rule(startWith,new String[] { "query.enterprisename","query.registationnumber" }, new String[] { "编程","1" },
+		Rule rule = new Rule(startWith,
 				"subject-item", Rule.CLASS, Rule.GET);
 		List<LinkTypeData> extracts = ExtractService.extract(rule,datas_,hrefs,hrefsUsed);
-		printf(extracts);
+		outPutResult(extracts);
 	}
 
 
 
-	public void printf(List<LinkTypeData> datas) throws IOException, RowsExceededException, WriteException
+	public void outPutResult(List<LinkTypeData> datas) throws IOException, RowsExceededException, WriteException
 	{
 		
 		 WritableWorkbook workbook = null;
 		 try {
 	
-		    workbook = Workbook.createWorkbook(new File("C:/Users/LJX/Desktop/爱立信/stu.xls"));//"E:/test/stu.xls"
+		    workbook = Workbook.createWorkbook(new File("C:/Users/LJX/Desktop/爱立信/douban.xls"));
 	        //创建新的一页
 	        WritableSheet sheet = workbook.createSheet("First Sheet", 0);
 	        //创建要显示的具体内容
